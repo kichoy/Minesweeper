@@ -5,32 +5,32 @@ import de.bezier.guido.*;
 int NUM_ROWS = 20; int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons that are mined
-bombs = new ArrayList <MSButton> bombs;
 
-void setup ()
+public void setup ()
 {
 	size(400, 400);
 	textAlign(CENTER,CENTER);
 
 	// make the manager
-    Interactive.make( this );
-    
-    
-    buttons = new MSButton[NUM_ROWS][NUM_COLS];
+		Interactive.make( this );
+	buttons = new MSButton[NUM_ROWS][NUM_COLS];
 	for (int r = 0; r < NUM_ROWS; r++)
 	{
 		for (int c = 0; c < NUM_COLS; c++)
-    	{
-    		buttons[r][c] = new MSButton(r, c);
-    	}
-    }
+		{
+			buttons[r][c] = new MSButton(r, c);
+		}
+	}
 
-    setBombs();
+
+	bombs = new ArrayList<MSButton>();
+	setBombs();
+	// println(buttons.contains(buttons[NUM_ROWS][NUM_COLS]));
 }
 
 public void setBombs()
 {
-    //your code
+		//your code
 }
 
 public void draw ()
@@ -42,18 +42,18 @@ public void draw ()
 
 public boolean isWon()
 {
-    //your code here
-    return false;
+		//your code here
+		return false;
 }
 
 public void displayLosingMessage()
 {
-    //your code here
+		//your code here
 }
 
 public void displayWinningMessage()
 {
-    //your code here
+		//your code here
 }
 
 public class MSButton
@@ -65,60 +65,60 @@ public class MSButton
 
 	public MSButton ( int rr, int cc )
 	{
-        width = 400/NUM_COLS;
-        height = 400/NUM_ROWS;
-        r = rr;
-        c = cc; 
-        x = c*width;
-        y = r*height;
-        label = "";
-        marked = clicked = false;
-        Interactive.add( this ); // register it with the manager
-    }
-    public boolean isMarked()
-    {
-    	return marked;
-    }
-    public boolean isClicked()
-    {
-    	return clicked;
-    }
-    // called by manager
-    
-    public void mousePressed () 
-    {
-    	clicked = true;
-        //your code here
-    }
+				width = 400/NUM_COLS;
+				height = 400/NUM_ROWS;
+				r = rr;
+				c = cc; 
+				x = c*width;
+				y = r*height;
+				label = "";
+				marked = clicked = false;
+				Interactive.add( this ); // register it with the manager
+		}
+		public boolean isMarked()
+		{
+			return marked;
+		}
+		public boolean isClicked()
+		{
+			return clicked;
+		}
+		// called by manager
+		
+		public void mousePressed () 
+		{
+			clicked = true;
+				//your code here
+		}
 
-    public void draw () 
-    {    
-    	if (marked)
-    		fill(0);
-        // else if( clicked && bombs.contains(this) ) 
-        //     fill(255,0,0);
-        else if(clicked)
-        	fill( 200 );
-        else 
-        	fill( 100 );
+		public void draw () 
+		{    
+			if (marked)
+				fill(0);
+				// else if( clicked && bombs.contains(this) ) 
+				//     fill(255,0,0);
+				else if(clicked)
+					fill( 200 );
+				else 
+					fill( 100 );
 
-        rect(x, y, width, height);
-        fill(0);
-        text(label,x+width/2,y+height/2);
-    }
-    public void setLabel(String newLabel)
-    {
-    	label = newLabel;
-    }
-    public boolean isValid(int r, int c)
-    {
-        //your code here
-        return false;
-    }
-    public int countBombs(int row, int col)
-    {
-    	int numBombs = 0;
-        //your code here
-        return numBombs;
-    }
+				rect(x, y, width, height);
+				fill(0);
+				text(label,x+width/2,y+height/2);
+		}
+		public void setLabel(String newLabel)
+		{
+			label = newLabel;
+		}
+		public boolean isValid(int r, int c)
+		{
+				//your code here
+				return false;
+		}
+		public int countBombs(int row, int col)
+		{
+			int numBombs = 0;
+				//your code here
+				return numBombs;
+		}
 }
