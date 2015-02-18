@@ -19,9 +19,10 @@ public void setup ()
 		for (int c = 0; c < NUM_COLS; c++)
 		{
 			buttons[r][c] = new MSButton(r, c);
+			println(r, c);
+			// println("buttons[r][c].countBombs(): "+buttons[r][c].countBombs(r,c));
 		}
 	}
-
 
 	bombs = new ArrayList<MSButton>();
 	setBombs();
@@ -123,20 +124,36 @@ public class MSButton
 
 	public boolean isValid(int r, int c) // if given coord is a valid square on grid
 	{
-		if ((r >= 0 && r <= NUM_ROWS) && (c >= 0 && r <= NUM_COLS)) 
+		if ((r >= 0 && r < NUM_ROWS) && (c >= 0 && c < NUM_COLS)) 
 		{
 			return true;
 		}
 		return false;
 	}
 
-	public int countBombs(int row, int col)
+	public int countBombs(int row, int col) //counts number of bombs touching square
 	{
 		int numBombs = 0;
-		if (isValid(row, col) && bombs.contains(buttons[row][col]) 
+		for (int j = -1; j <= 1; j++)
 		{
-			numBombs++;
+			for (int i = -1; i <= 1; i++)
+			{
+				if ((isValid(row+j, col+i) == true) && (j != 0) && (i != 0))
+				{
+					// println("(isValid(row+j, col+i): "+(isValid(row+j, col+i)));
+					// println("(row+j): "+(row+j));
+					// println("(col+i): "+(col+i));
+
+					// println("prints the button: "+buttons[row+j][col+i]);
+					
+					// if (bombs.contains(buttons[row+j][col+i]))
+					// {
+					// 	numBombs++;
+					// }
+				}
+			}	
 		}
+
 		return numBombs;
 	}
 }
