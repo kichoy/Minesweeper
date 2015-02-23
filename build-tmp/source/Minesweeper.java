@@ -37,13 +37,19 @@ public void setup ()
 		for (int c = 0; c < NUM_COLS; c++)
 		{
 			buttons[r][c] = new MSButton(r, c);
-			println(r, c);
-			// println("buttons[r][c].countBombs(): "+buttons[r][c].countBombs(r,c));
 		}
 	}
 
 	bombs = new ArrayList<MSButton>();
 	setBombs();
+
+	// for (int r = 0; r < NUM_ROWS; r++)
+	// {
+	// 	for (int c = 0; c < NUM_COLS; c++)
+	// 	{
+	// 		println(buttons[r][c].countBombs(r, c));
+	// 	}
+	// }
 }
 
 public void setBombs()
@@ -69,18 +75,28 @@ public void draw ()
 
 public boolean isWon()
 {
-		//your code here
-		return false;
+	for (int r = 0; r < NUM_ROWS; r++)
+	{
+		for (int c = 0; c < NUM_COLS; c++)
+		{
+			if (buttons[r][c].isMarked())
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 public void displayLosingMessage()
 {
-		//your code here
+	ellipse(width/2, height/2, width/2, height/2);
+	text ("you lose", width/2, height/2);
 }
 
 public void displayWinningMessage()
 {
-		//your code here
+
 }
 
 public class MSButton
@@ -117,7 +133,22 @@ public class MSButton
 	public void mousePressed () 
 	{
 		clicked = true;
-		//your code here
+		if (keyPressed)
+		{
+			marked = !marked;
+		}
+		else if (bombs.contains(this))
+		{
+			displayWinningMessage();
+		}
+		else if (this.countBombs(this) > 0)
+		{
+			label = this.countBombs(this);
+		}
+		else 
+		{
+			mousePressed();
+		}
 	}
 
 	public void draw () 
@@ -149,25 +180,21 @@ public class MSButton
 		return false;
 	}
 
-	public int countBombs(int row, int col) //counts number of bombs touching square
+	public int countBombs(int row, int col) //counts number of bombs touching the square
 	{
 		int numBombs = 0;
 		for (int j = -1; j <= 1; j++)
 		{
 			for (int i = -1; i <= 1; i++)
 			{
-				if ((isValid(row+j, col+i) == true) && (j != 0) && (i != 0))
+				if ((isValid(row+j, col+i)) && ((j != 0) && (i != 0)))
 				{
-					// println("(isValid(row+j, col+i): "+(isValid(row+j, col+i)));
-					// println("(row+j): "+(row+j));
-					// println("(col+i): "+(col+i));
-
-					// println("prints the button: "+buttons[row+j][col+i]);
+					// println("(isValid(" + (row+j) + ", " + (col+i) + "):" +(isValid(row+j, col+i)));
 					
-					// if (bombs.contains(buttons[row+j][col+i]))
-					// {
-					// 	numBombs++;
-					// }
+					if (bombs.contains(buttons[row+j][col+i]))
+					{
+						numBombs++;
+					}
 				}
 			}	
 		}
