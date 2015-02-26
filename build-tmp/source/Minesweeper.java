@@ -18,7 +18,6 @@ public class Minesweeper extends PApplet {
 
 
 
-
 int NUM_ROWS = 20; int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons that are mined
@@ -130,26 +129,26 @@ public class MSButton
 	}
 	// called by manager
 	
-	public void mousePressed () 
-	{
-		clicked = true;
-		if (keyPressed)
-		{
-			marked = !marked;
-		}
-		else if (bombs.contains(this))
-		{
-			displayWinningMessage();
-		}
-		else if (this.countBombs(this) > 0)
-		{
-			label = this.countBombs(this);
-		}
-		else 
-		{
-			mousePressed();
-		}
-	}
+	// public void mousePressed () 
+	// {
+	// 	clicked = true;
+	// 	if (keyPressed)
+	// 	{
+	// 		marked = !marked;
+	// 	}
+	// 	else if (bombs.contains(this))
+	// 	{
+	// 		displayWinningMessage();
+	// 	}
+	// 	else if (this.countBombs(this) > 0)
+	// 	{
+	// 		this.setLabel(this.countBombs(this));
+	// 	}
+	// 	else 
+	// 	{
+	// 		mousePressed();
+	// 	}
+	// }
 
 	public void draw () 
 	{
@@ -188,9 +187,7 @@ public class MSButton
 			for (int i = -1; i <= 1; i++)
 			{
 				if ((isValid(row+j, col+i)) && ((j != 0) && (i != 0)))
-				{
-					// println("(isValid(" + (row+j) + ", " + (col+i) + "):" +(isValid(row+j, col+i)));
-					
+				{	
 					if (bombs.contains(buttons[row+j][col+i]))
 					{
 						numBombs++;
@@ -198,7 +195,6 @@ public class MSButton
 				}
 			}	
 		}
-
 		return numBombs;
 	}
 }

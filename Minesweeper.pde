@@ -1,5 +1,4 @@
 
-
 import de.bezier.guido.*;
 int NUM_ROWS = 20; int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
@@ -112,26 +111,26 @@ public class MSButton
 	}
 	// called by manager
 	
-	public void mousePressed () 
-	{
-		clicked = true;
-		if (keyPressed)
-		{
-			marked = !marked;
-		}
-		else if (bombs.contains(this))
-		{
-			displayWinningMessage();
-		}
-		else if (this.countBombs(this) > 0)
-		{
-			this.setLabel(this.countBombs(this));
-		}
-		else 
-		{
-			mousePressed();
-		}
-	}
+	// public void mousePressed () 
+	// {
+	// 	clicked = true;
+	// 	if (keyPressed)
+	// 	{
+	// 		marked = !marked;
+	// 	}
+	// 	else if (bombs.contains(this))
+	// 	{
+	// 		displayWinningMessage();
+	// 	}
+	// 	else if (this.countBombs(this) > 0)
+	// 	{
+	// 		this.setLabel(this.countBombs(this));
+	// 	}
+	// 	else 
+	// 	{
+	// 		mousePressed();
+	// 	}
+	// }
 
 	public void draw () 
 	{
