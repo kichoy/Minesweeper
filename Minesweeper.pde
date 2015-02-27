@@ -111,26 +111,26 @@ public class MSButton
 	}
 	// called by manager
 	
-	// public void mousePressed () 
-	// {
-	// 	clicked = true;
-	// 	if (keyPressed)
-	// 	{
-	// 		marked = !marked;
-	// 	}
-	// 	else if (bombs.contains(this))
-	// 	{
-	// 		displayWinningMessage();
-	// 	}
-	// 	else if (this.countBombs(this) > 0)
-	// 	{
-	// 		this.setLabel(this.countBombs(this));
-	// 	}
-	// 	else 
-	// 	{
-	// 		mousePressed();
-	// 	}
-	// }
+	public void mousePressed () 
+	{
+		clicked = true;
+		if (keyPressed)
+		{
+			marked = !marked;
+		}
+		else if (bombs.contains(this))
+		{
+			displayLosingMessage();
+		}
+		else if (countBombs(r, c) > 0)
+		{
+			setLabel(Integer.toString(countBombs(r, c)));
+		}
+		else 
+		{
+			mousePressed();
+		}
+	}
 
 	public void draw () 
 	{
