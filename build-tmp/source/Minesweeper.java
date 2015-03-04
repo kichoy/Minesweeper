@@ -132,24 +132,39 @@ public class MSButton
 	public void mousePressed () 
 	{
 		clicked = true;
-		if (keyPressed)
+		if (keyPressed) 
 		{
-			marked = !marked;
+			marked = !marked; // toggle marked
 		}
-		else if (bombs.contains(this))
+		else if (bombs.contains(this)) //if the button is a bomb
 		{
-			displayLosingMessage();
+			displayLosingMessage(); 
 		}
 		else if (countBombs(r, c) > 0)
 		{
-			setLabel(Integer.toString(countBombs(r, c)));
+			setLabel(Integer.toString(countBombs(r, c))); //set the label of the button to countBombs(r, c)
 		}
 		else 
 		{
-			if (isValid(r+1, c))
+			for(int i = -1; i < 2; i++)
 			{
-				buttons[r+1][c].mousePressed();	
+				for(int j = -1; j< 2; j++)
+				{
+					if(isValid(r + i, c + j) && !((r + i == r) && (c + j == c)) && clicked == false) 
+					{
+						int x = r+i; int y = c+j;
+						if(!bombs.contains(buttons[r + i][c + j]))//Checks if it does NOT have a bomb.
+						{
+							buttons[r + i][c + j].mousePressed();
+							println("buttons[r+i][c+j]: "+ x + y);
+						}
+					}
+				}
 			}
+			// if (isValid(r+1, c))
+			// {
+			// 	buttons[r+1][c].mousePressed();	
+			// }
 			// if (isValid(r-1, c))
 			// {
 			// 	buttons[r-1][c].mousePressed();	
@@ -194,14 +209,14 @@ public class MSButton
 		return false;
 	}
 
-	public int countBombs(int row, int col) //counts number of bombs touching the square
+	public int countBombs(int row, int col) // counts number of bombs touching the square
 	{
 		int numBombs = 0;
 		for (int j = -1; j <= 1; j++)
 		{
 			for (int i = -1; i <= 1; i++)
 			{
-				if ((isValid(row+j, col+i)) && ((j != 0) && (i != 0)))
+				if ((isValid(row+j, col+i)) && !((r + i == r) && (c + j == c)))
 				{	
 					if (bombs.contains(buttons[row+j][col+i]))
 					{
