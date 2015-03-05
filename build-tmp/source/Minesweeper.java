@@ -53,7 +53,7 @@ public void setup ()
 
 public void setBombs()
 {
-	int numBombs = 10;
+	int numBombs = 60;
 	for (int i = 0; i < numBombs; i++) 
 	{
 		int row = (int)(Math.random()*NUM_ROWS);
@@ -89,13 +89,23 @@ public boolean isWon()
 
 public void displayLosingMessage()
 {
-	ellipse(width/2, height/2, width/2, height/2);
-	text ("you lose", width/2, height/2);
+	String msg = "You lose";
+	int startBlock = 2;
+	for(int j = 0; j < msg.length(); j++)
+	{
+		buttons[NUM_ROWS/2][j + startBlock].setLabel(msg.substring(j, j+1));
+	}
+	
 }
 
 public void displayWinningMessage()
 {
-
+ 	String msg = "You win";
+	int startBlock = 2;
+	for(int j = 0; j < msg.length(); j++)
+	{
+		buttons[NUM_ROWS/2][j + startBlock].setLabel(msg.substring(j, j+1));
+	}
 }
 
 public class MSButton
@@ -146,18 +156,15 @@ public class MSButton
 		}
 		else 
 		{
-			for(int i = -1; i < 2; i++)
+			for(int i = -1; i <= 1; i++)
 			{
-				for(int j = -1; j< 2; j++)
+				for(int j = -1; j <= 1; j++)
 				{
-					if(isValid(r + i, c + j) && !((r + i == r) && (c + j == c)) && clicked == false) 
+					println(i + ", " + j);
+					if(isValid(r + i, c + j) && buttons[r + i][c + j].clicked == false) 
 					{
-						int x = r+i; int y = c+j;
-						if(!bombs.contains(buttons[r + i][c + j]))//Checks if it does NOT have a bomb.
-						{
-							buttons[r + i][c + j].mousePressed();
-							println("buttons[r+i][c+j]: "+ x + y);
-						}
+						//if(!bombs.contains(buttons[r + i][c + j]))//Checks if it does NOT have a bomb.
+						buttons[r + i][c + j].mousePressed();
 					}
 				}
 			}
@@ -212,18 +219,16 @@ public class MSButton
 	public int countBombs(int row, int col) // counts number of bombs touching the square
 	{
 		int numBombs = 0;
-		for (int j = -1; j <= 1; j++)
+		for (int i = -1; i <= 1; i++)
 		{
-			for (int i = -1; i <= 1; i++)
+			for (int j = -1; j <= 1; j++)
 			{
-				if ((isValid(row+j, col+i)) && !((r + i == r) && (c + j == c)))
-				{	
-					if (bombs.contains(buttons[row+j][col+i]))
-					{
+				if ((isValid(row+i, col+j)) && !((r + i == r) && (c + j == c)))
+				{
+					if (bombs.contains(buttons[row+i][col+j]))
 						numBombs++;
-					}
 				}
-			}	
+			}
 		}
 		return numBombs;
 	}
