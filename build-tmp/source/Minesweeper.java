@@ -53,7 +53,7 @@ public void setup ()
 
 public void setBombs()
 {
-	int numBombs = 60;
+	int numBombs = 10;
 	for (int i = 0; i < numBombs; i++) 
 	{
 		int row = (int)(Math.random()*NUM_ROWS);
@@ -89,6 +89,18 @@ public boolean isWon()
 
 public void displayLosingMessage()
 {
+	for (int r = 0; r < NUM_ROWS; r++)
+	{
+		for (int c = 0; c < NUM_COLS; c++)
+		{
+			if (bombs.contains(buttons[r][c]))
+			{
+				println("buttons["+r+"]["+c+"]: "+r+c);
+				buttons[r][c].marked();
+			}
+		}
+	}
+
 	String msg = "You lose";
 	int startBlock = 2;
 	for(int j = 0; j < msg.length(); j++)
@@ -139,7 +151,7 @@ public class MSButton
 	}
 	// called by manager
 	
-	public void mousePressed () 
+	public void mousePressed() 
 	{
 		clicked = true;
 		if (keyPressed) 
@@ -156,14 +168,14 @@ public class MSButton
 		}
 		else 
 		{
-			for(int i = -1; i <= 1; i++)
+			for (int i = -1; i <= 1; i++)
 			{
-				for(int j = -1; j <= 1; j++)
+				for (int j = -1; j <= 1; j++)
 				{
-					println(i + ", " + j);
-					if(isValid(r + i, c + j) && buttons[r + i][c + j].clicked == false) 
+					//check if the neighbors are valid and have not been clicked
+					if (isValid(r + i, c + j) && buttons[r + i][c + j].clicked == false) 
 					{
-						//if(!bombs.contains(buttons[r + i][c + j]))//Checks if it does NOT have a bomb.
+						//if (!bombs.contains(buttons[r + i][c + j]))//Checks if it does NOT have a bomb.
 						buttons[r + i][c + j].mousePressed();
 					}
 				}
