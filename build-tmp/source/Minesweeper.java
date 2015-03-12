@@ -73,13 +73,13 @@ public boolean isWon()
 	{
 		for (int c = 0; c < NUM_COLS; c++)
 		{
-			// 1. if all buttons are clicked, display win
+			// 1. checks number of buttons clicked
 			if (buttons[r][c].isClicked()) 
 			{
 				buttonsClicked++;
 			}
 
-			// 2. if the button is a bomb, and if the bomb is marked, 
+			// 2. checks number of bombs marked
 			if (bombs.contains(buttons[r][c])) 
 			{
 				if (buttons[r][c].isMarked() == true)
@@ -90,6 +90,7 @@ public boolean isWon()
 		}
 	}
 
+	// if the # buttons clicked and # bombs marked is correct, win
 	if (buttonsClicked == (NUM_ROWS*NUM_COLS-numBombs) && (buttonsMarked == numBombs))
 	{
 		return true;
@@ -210,9 +211,9 @@ public class MSButton
 	{
 		if (marked)
 			fill(0);
-		else if( clicked && bombs.contains(this) ) 
+		else if ( clicked && bombs.contains(this) ) 
 			fill(255,0,0);
-		else if(clicked)
+		else if (clicked)
 			fill( 200 );
 		else 
 			fill( 100 );
