@@ -157,30 +157,29 @@ public class MSButton
 	
 	public void mousePressed() 
 	{
-		if (mouseButton == LEFT)
-		{
-			clicked = true;
-			if (bombs.contains(this)) //if the button is a bomb
-				displayLosingMessage(); 
-			else if (countBombs(r, c) > 0)
-				setLabel(Integer.toString(countBombs(r, c))); //set the label of the button to countBombs(r, c)
-			else 
-				for (int i = -1; i <= 1; i++)
-				{
-					for (int j = -1; j <= 1; j++)
-					{
-						//check if the neighbors are valid and have not been clicked
-						if (isValid(r + i, c + j) && buttons[r + i][c + j].clicked == false) 
-						{
-							buttons[r + i][c + j].mousePressed();
-						}
-					}
-				}
-		}
 		if ((mouseButton == RIGHT) && (clicked == false))
 		{
 			marked = !marked;
+			break;
 		}
+		
+		clicked = true;
+		if (bombs.contains(this)) //if the button is a bomb
+			displayLosingMessage(); 
+		else if (countBombs(r, c) > 0)
+			setLabel(Integer.toString(countBombs(r, c))); //set the label of the button to countBombs(r, c)
+		else 
+			for (int i = -1; i <= 1; i++)
+			{
+				for (int j = -1; j <= 1; j++)
+				{
+					//check if the neighbors are valid and have not been clicked
+					if (isValid(r + i, c + j) && buttons[r + i][c + j].clicked == false) 
+					{
+						buttons[r + i][c + j].mousePressed();
+					}
+				}
+			}
 	}
 
 	public void draw () 
