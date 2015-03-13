@@ -28,7 +28,7 @@ public void setup ()
 
 public void setBombs(int numBombs)
 {
-	for (int i = 0; i < numBombs; i++) 
+	for (int i = 0; i < numBombs; i++)
 	{
 		int row = (int)(Math.random()*NUM_ROWS);
 		int col = (int)(Math.random()*NUM_COLS);
@@ -48,32 +48,24 @@ public void draw ()
 
 public boolean isWon()
 {
-	int buttonsMarked = 0;
-	int buttonsClicked = 0;
-	// loop does 2 things
+	// counts number of bombs marked
+	int bombsMarked = 0;
 	for (int r = 0; r < NUM_ROWS; r++)
 	{
 		for (int c = 0; c < NUM_COLS; c++)
 		{
-			// 1. checks number of buttons clicked
-			if (buttons[r][c].isClicked()) 
-			{
-				buttonsClicked++;
-			}
-
-			// 2. checks number of bombs marked
 			if (bombs.contains(buttons[r][c])) 
 			{
 				if (buttons[r][c].isMarked() == true)
 				{
-					buttonsMarked++;
+					bombsMarked++;
 				}
 			}
 		}
 	}
 
 	// if the # buttons clicked and # bombs marked is correct, win
-	if (buttonsClicked == (NUM_ROWS*NUM_COLS-numBombs) && (buttonsMarked == numBombs))
+	if (bombsMarked == numBombs)
 	{
 		return true;
 	}
@@ -106,7 +98,6 @@ public void displayLosingMessage()
 	{
 		buttons[NUM_ROWS/2][i + startBlock].setLabel(msg.substring(i, i+1));
 	}
-	
 }
 
 public void displayWinningMessage()
