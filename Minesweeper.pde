@@ -48,7 +48,7 @@ public void draw ()
 
 public boolean isWon()
 {
-	// counts number of bombs marked
+// counts number of bombs marked
 	int bombsMarked = 0;
 	for (int r = 0; r < NUM_ROWS; r++)
 	{
@@ -102,7 +102,7 @@ public void displayLosingMessage()
 
 public void displayWinningMessage()
 {
- 	String msg = "You win";
+ 	String msg = "Winner";
 	int startBlock = NUM_COLS/2 - msg.length()/2;
 	for(int i = 0; i < msg.length(); i++)
 	{
