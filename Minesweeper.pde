@@ -160,7 +160,7 @@ public class MSButton
 		if ((mouseButton == RIGHT) && (clicked == false))
 		{
 			marked = !marked;
-			break;
+			return;
 		}
 		
 		clicked = true;
